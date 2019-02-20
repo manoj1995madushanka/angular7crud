@@ -8,6 +8,8 @@ import {environment} from "../environments/environment";
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeComponent } from './employees/employee/employee.component';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {EmployeeService} from "./shared/employee.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,10 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
