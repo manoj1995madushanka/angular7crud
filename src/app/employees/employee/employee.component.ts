@@ -11,7 +11,9 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private service: EmployeeService, private firestore: AngularFirestore, private toastr: ToastrService) { }
+  constructor(private service: EmployeeService,
+              private firestore: AngularFirestore,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.resetForm();
@@ -34,6 +36,7 @@ export class EmployeeComponent implements OnInit {
     const data = form.value;
     this.firestore.collection('employees').add(data);
     this.resetForm(form);
+    this.toastr.success('submitted successfully','EMP. REGISTER');
   }
 
 }
