@@ -25,7 +25,7 @@ export class EmployeeComponent implements OnInit {
     }
     this.service.formData = {
       id: null,
-      fullName: '',
+      fullname: '',
       position: '',
       empCode: '',
       mobile: '',
@@ -33,10 +33,18 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const data = form.value;
-    this.firestore.collection('employees').add(data);
+    const data = Object.assign({}, form.value);
+    delete data.id;
+    if (form.value.id == null) {
+      this.firestore.collection('employees').add(data);
+    }
+    else {
+      this.firestore.doc('employees/' + form.value.id).update(data);
+    }
+    /*const data = form.value;
+    this.firestore.collection('employees').add(data);*/
     this.resetForm(form);
-    this.toastr.success('submitted successfully','EMP. REGISTER');
+    this.toastr.success('submitted successfully', 'EMP. REGISTER');
   }
 
 }
